@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TsReaper 的算法竞赛题解</title>
+
+<style type="text/css">
+body {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+}
+
+#container {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+}
+
+#search-bar * {
+  font-size: 16px;
+  margin: 15px 10px;
+}
+
+h2, h4 {
+  text-align: center;
+}
+</style>
+
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/markdown-it/8.3.1/markdown-it.min.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/SVG"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+  });
+</script>
+<script type="text/javascript"
+   src="http://cdn.staticfile.org/mathjax/2.7.0/MathJax.js">
+</script>
+</head>
+
+<body>
+<div id="container">
+  <div id="search-bar">
+    <select id="oj">
+      <option value="codeforces">Codeforces</option>
+      <option value="timus">Timus</option>
+      <option value="zoj">ZOJ</option>
+    </select>
+    <input id="prob" placeholder="输入题号，如 1001 或 933A" style="width: 250px;" />
+    <button id="go">Go!</button>
+  </div>
+  <div id="content"></div>
+</div>
+
+<script type="text/javascript" src="codeforces/symlink.js"></script>
+<script type="text/javascript">
+$('#go').click(function() {
+  window.location.href = 'search.html?oj=' + $('#oj').val() + '&prob=' + $('#prob').val();
+});
+$("#prob").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#go").click();
+    }
+});
+
+let md = window.markdownit();
+md.options.breaks = true;
+md.options.html = true;
+md.options.typographer = true;
+md.options.xhtmlOut = true;
+
+let expoj = /oj=(.+)&/;
+let expprob = /prob=(.+)/;
+let oj = '';
+let prob = '';
+if (expoj.test(window.location.search)) {
+  oj = window.location.search.match(expoj)[1];
+}
+if (expprob.test(window.location.search)) {
+  prob = window.location.search.match(expprob)[1].toUpperCase();
+  if (oj == 'codeforces' && symlink[prob] != undefined) {
+    prob = symlink[prob];
+  }
+}
+$.ajax({
+  url : 'https://raw.githubusercontent.com/TsReaper/Competitive-Programming/master/' + oj + '/' + prob + '/README.md',
+  dataType: 'text',
+  success: function(data) {
+    $('#content').html(md.render(data.replace(/\\/g, '\\\\')));
+    MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
+  },
+  error: function() {
+    $('#content').html(
+      '<h2>并没有找到这道题的题解...</h2>' +
+      '<p style="text-align: center;">是有趣的题目吗？可以通过发布 issue 的方式推荐给我~</p>'
+    );
+  }
+});
+</script>
+</body>
+
+</html>
