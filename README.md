@@ -8,6 +8,6 @@ https://tsreaper.github.io/Competitive-Programming/
 
 |OJ        |题解数|
 |----------|-----|
-|Codeforces|5    |
+|Codeforces|12   |
 |Timus     |2    |
 |ZOJ       |2    |

@@ -61,7 +61,7 @@ h2, h4 {
     <input id="prob" placeholder="输入题号，如 1001 或 933A" style="width: 250px;" />
     <button id="go">Go!</button>
   </div>
-  <div id="content"></div>
+  <div id="content"><h2>加载中...</h2></div>
 </div>
 
 <script type="text/javascript" src="codeforces/symlink.js"></script>
@@ -95,7 +95,7 @@ if (expprob.test(window.location.search)) {
   }
 }
 $.ajax({
-  url : 'https://raw.githubusercontent.com/TsReaper/Competitive-Programming/master/' + oj + '/' + prob + '/README.md',
+  url: 'https://raw.githubusercontent.com/TsReaper/Competitive-Programming/master/' + oj + '/' + prob + '/README.md',
   dataType: 'text',
   success: function(data) {
     $('#content').html(md.render(data.replace(/\\/g, '\\\\')));
@@ -104,7 +104,7 @@ $.ajax({
   error: function() {
     $('#content').html(
       '<h2>并没有找到这道题的题解...</h2>' +
-      '<p style="text-align: center;">是有趣的题目吗？可以通过发布 issue 的方式推荐给我~</p>'
+      '<p style="text-align: center;">是有趣的题目吗？<a href="https://github.com/TsReaper/Competitive-Programming/issues/new">发个 issue</a> 推荐给我~</p>'
     );
   }
 });
