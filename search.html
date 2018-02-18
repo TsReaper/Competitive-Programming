@@ -91,9 +91,12 @@ if (expoj.test(window.location.search)) {
   oj = window.location.search.match(expoj)[1];
 }
 if (expprob.test(window.location.search)) {
-  prob = window.location.search.match(expprob)[1].toUpperCase();
-  if (oj == 'codeforces' && symlink[prob] != undefined) {
-    prob = symlink[prob];
+  prob = window.location.search.match(expprob)[1];
+  if (oj == 'codeforces') {
+    prob = prob.toUpperCase();
+    if (symlink[prob] != undefined) {
+      prob = symlink[prob];
+    }
   }
 }
 $.ajax({
