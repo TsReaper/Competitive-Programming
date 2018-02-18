@@ -11,7 +11,6 @@ body {
   display: flex;
   display: -webkit-flex;
   justify-content: center;
-  align-items: center;
 }
 
 #container {
@@ -37,6 +36,7 @@ body {
 </head>
 
 <body>
+<a href="https://github.com/TsReaper/Competitive-Programming"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
 <div id="container">
   <h2>TsReaper 的算法竞赛题解</h2>
   <div id="search-bar">
@@ -48,6 +48,7 @@ body {
     <input id="prob" placeholder="输入题号，如 1001 或 933C" style="width: 250px;" />
     <button id="go">Go!</button>
   </div>
+  <a href="contest.html" style="font-size: 18px;">其它比赛列表</a>
   <div id="chart"></div>
 </div>
 
@@ -70,7 +71,7 @@ $(function () {
       text: '题解数量统计'
     },
     xAxis: {
-      categories: ['Codeforces', 'Timus', 'ZOJ']
+      categories: ['Codeforces', 'Timus', 'ZOJ', '其它比赛']
     },
     yAxis: {
       min: 0,
@@ -94,7 +95,7 @@ $(function () {
     },
     series: [{
         name: '题解数量',
-        data: [12, 2, 2]
+        data: [12, 2, 2, 5]
     }]
   });
 });
